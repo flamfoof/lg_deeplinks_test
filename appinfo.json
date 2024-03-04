@@ -1,0 +1,12 @@
+{
+  "id": "com.freecast.linktest",
+  "version": "0.0.1",
+  "vendor": "My Company",
+  "type": "web",
+  "main": "index.html",
+  "title": "LG DL Tester",
+  "icon": "icon.png",
+  "largeIcon": "largeIcon.png",
+  "inspectable": true,
+  "disableBackHistoryAPI": true
+}

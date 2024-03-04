@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>new app</title>
+		<style type="text/css">
+			body {
+				width: 100%;
+				height: 100%;
+				background-color: #202020;
+			}
+
+			div {
+				position: absolute;
+				height: 100%;
+				width: 100%;
+				display: table;
+			}
+
+			h1 {
+				display: table-cell;
+				vertical-align: middle;
+				text-align: center;
+				color: #ffffff;
+			}
+		</style>
+	</head>
+
+	<script src="webOSTVjs-1.2.8/webOSTV.js" charset="utf-8"></script>
+	<script src="webOSTVjs-1.2.8/webOSTV-dev.js" charset="utf-8"></script>
+	<script type="text/javascript">
+		console.log("Launching");
+		var bridge = new WebOSServiceBridge();
+
+		bridge.onservicecallback = callback;
+
+		//sample response: {errorCode: -101, returnValue: false, errorText: "not exist"}
+		function callback(msg){
+			var response = JSON.parse(msg);
+			console.log(response);
+		}
+
+		//Call this to launch the deeplinks
+		var params = JSON.stringify({
+			id: "com.wbd.stream",
+			params: {
+				contentTarget:  "bolt-video-7cc6115e-2bb5-46dc-a6b8-14a66b257485"
+			},
+		});
+
+		bridge.call("luna://com.webos.applicationManager/launch", params);
+
+		// Use this to call for the store page launch
+		var storeParams = JSON.stringify({
+			id: "com.webos.app.discovery",
+			params: {
+				"caller": { "id": "com.webos.app.voice", "optional": "com.cbs-all-access.webapp.prod" }, //replace vudu with the app id of the app you want to launch
+	        	"query": "category/GAME_APPS/com.cbs-all-access.webapp.prod" //here too
+			}
+		});
+		
+		// bridge.call("luna://com.webos.applicationManager/launch", storeParams);
+		// bridge.call("ssap://com.webos.applicationManager/listApps", storeParams);
+	</script>
+
+	<body>
+		<div>
+			<h1>Hello, World!</h1>
+		</div>
+	</body>
+</html>
